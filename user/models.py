@@ -15,7 +15,6 @@ class User:
     def signup(self):
         print(request.form)
 
-        # Create the user object
         user = {
             "_id": uuid.uuid4().hex,
             "name": request.form.get('name'),
@@ -23,10 +22,8 @@ class User:
             "password": request.form.get('password')
         }
 
-        # Encrypt the password
         user['password'] = pbkdf2_sha256.encrypt(user['password'])
 
-        # Check for existing email address
         if db.users.find_one({"email": user['email']}):
             return jsonify({"error": "Email address already in use"}), 400
 
