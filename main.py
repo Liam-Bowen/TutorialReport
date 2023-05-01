@@ -5,12 +5,9 @@ import pymongo
 app = Flask(__name__)
 app.secret_key = b'#\x9dlU#\xd2y\x04\xb90\x0b]\xc6\x0b\xef/'
 
-# Database
 client = pymongo.MongoClient('localhost', 27017)
 db = client.user_login_system
 
-
-# Decorators
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -22,7 +19,6 @@ def login_required(f):
     return wrap
 
 
-# Routes
 from user import routes
 
 
